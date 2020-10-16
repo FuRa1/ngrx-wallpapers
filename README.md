@@ -1,4 +1,12 @@
-# NgrxGithub
+# Ngrx unsplash Wallpapers
+
+
+## You need to set Unsplash API key
+
+src/app/unsplash-api.const.ts
+
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
 
