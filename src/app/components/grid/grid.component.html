@@ -1,0 +1,11 @@
+<div class="grid-wrp">
+  <ng-container *ngFor="let wallpaper of wallpapers">
+    <section>
+      <h5>{{ wallpaper.description }}</h5>
+      <img [src]="wallpaper.urls.small"  alt="none"/>
+      <button (click)="dispatchAction(wallpaper)">{{ actionName }}</button>
+    </section>
+  </ng-container>
+</div>
+<div *ngIf="papers">Loading...</div>
+

@@ -1,0 +1,8 @@
+
+<app-search></app-search>
+<app-grid
+  [wallpapers]="recent"
+  [actionName]="'Favorite'"
+  [action]="addToFavorites"
+></app-grid>
+<a routerLink="favorites">Go to Favorites</a>
