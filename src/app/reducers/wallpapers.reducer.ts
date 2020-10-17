@@ -5,10 +5,15 @@ import { IAppState } from '../app.state';
 const initialState: IAppState = {
   recent: [],
   favorites: [],
+  recentLoading: false,
 };
 
 export function reducer(state: IAppState = initialState, action: WallpaperActions.Actions): IAppState {
   switch (action.type) {
+    case WallpaperActions.RECENT_LOADING:
+      return { ...state, recentLoading: true};
+    case WallpaperActions.RECENT_LOADED:
+      return { ...state, recentLoading: false};
     case WallpaperActions.ADD_RECENT_WALLPAPERS:
       return { ...state, recent: [...action.payload] };
     case WallpaperActions.ADD_WALLPAPER_TO_FAVORITES:

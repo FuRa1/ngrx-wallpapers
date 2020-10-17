@@ -12,7 +12,8 @@ import { BrowserModule } from '@angular/platform-browser';
   declarations: [DashboardComponent, SearchComponent],
   imports: [
     RouterModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    CommonModule
   ]
 })
 export class DashboardModule { }

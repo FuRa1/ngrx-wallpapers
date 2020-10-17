@@ -11,7 +11,9 @@ import { reducer } from './reducers/wallpapers.reducer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { SharedComponentsModule } from './components/components.module';
-
+import { EffectsModule } from '@ngrx/effects';
+import { WallpapersEffects } from './actions/wallpapers.effects';
+import { UnsplashApiService } from './api/unsplash-api.service';
 
 @NgModule({
   declarations: [
@@ -24,13 +26,16 @@ import { SharedComponentsModule } from './components/components.module';
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    EffectsModule.forRoot([WallpapersEffects]),
     StoreModule.forRoot({
       wallpapers: reducer
     })
   ],
   exports: [
   ],
-  providers: [],
+  providers: [
+    UnsplashApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

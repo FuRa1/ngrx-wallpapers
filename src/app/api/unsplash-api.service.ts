@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import Unsplash, { toJson } from 'unsplash-js';
-import { APP_ACCESS_KEY } from './unsplash-api.const';
+import { APP_ACCESS_KEY } from '../unsplash-api.const';
+import { Observable } from 'rxjs';
+import { from } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UnsplashApiService {
   public unsplash: Unsplash;
   constructor() {
@@ -13,7 +13,7 @@ export class UnsplashApiService {
     });
   }
 
-  public getLast15(): Promise<any> {
-    return this.unsplash.photos.listPhotos(2, 15, 'latest');
+  public getLast15(): Observable<any> {
+    return from(this.unsplash.photos.listPhotos(2, 15, 'latest').then(toJson));
   }
 }

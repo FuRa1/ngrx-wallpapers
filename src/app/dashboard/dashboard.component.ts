@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UnsplashApiService } from '../unsplash-api.service';
-import { toJson } from 'unsplash-js';
 import { select, Store } from '@ngrx/store';
 import { IWallpaper, IUser } from '../models/wallpaper.model';
 import * as WallpaperActions from './../actions/wallpapers.actions';
 import { IAppState } from '../app.state';
+import { GET_RECENT_WALLPAPERS } from '../actions/wallpapers.effects';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,13 +14,16 @@ import { IAppState } from '../app.state';
 export class DashboardComponent implements OnInit {
 
   public recent: IWallpaper[];
+  public loading: boolean;
 
   constructor(
-    private unsplashAPi: UnsplashApiService,
     private store: Store<{ wallpapers: IAppState }>
   ) {
     store.pipe(select('wallpapers'))
-      .subscribe(data => (this.recent = data.recent));
+      .subscribe(data => {
+        this.recent = data.recent;
+        this.loading = data.recentLoading;
+      });
   }
 
   public addToFavorites(paper: IWallpaper): void {
@@ -29,17 +31,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const recent = JSON.parse(localStorage.getItem('recent'));
-    if (recent) {
-      this.store.dispatch(new WallpaperActions.AddRecentWallpapers(recent));
-    } else {
-      this.unsplashAPi.getLast15()
-        .then(toJson)
-        .then((json: IWallpaper[]) => {
-          localStorage.setItem('recent', JSON.stringify(json));
-          this.store.dispatch(new WallpaperActions.AddRecentWallpapers(json));
-        });
-    }
+    this.store.dispatch({type: GET_RECENT_WALLPAPERS});
 
   }
 
