@@ -4,13 +4,13 @@ import { DashboardComponent } from './dashboard.component';
 import { SearchComponent } from './search/search.component';
 import { RouterModule } from '@angular/router';
 import { SharedComponentsModule } from '../components/components.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
 @NgModule({
   declarations: [DashboardComponent, SearchComponent],
   imports: [
-    CommonModule,
     RouterModule,
     SharedComponentsModule
   ]

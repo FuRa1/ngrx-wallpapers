@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IWallpaper } from '../../models/wallpaper.model';
 
@@ -16,8 +16,7 @@ export class GridComponent implements OnInit {
   @Input() action: (paper: IWallpaper) => void;
   @Input() actionName: string;
 
-  constructor(
-  ) {
+  constructor() {
 
   }
 

@@ -1,0 +1,31 @@
+.grid {
+  &-wrp{
+    display: grid;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: stretch;
+    align-items: center;
+    align-content: center;
+  }
+  &-item{
+    position: relative;
+  }
+  &-action{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: aqua;
+    cursor: pointer;
+    box-shadow: 2px 1px 4px grey;
+    &:hover{
+      background-color: darken(aqua, 5%);
+    }
+    &:active{
+      background-color: darken(aqua, 15%);
+    }
+  }
+}

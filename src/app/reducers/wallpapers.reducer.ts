@@ -12,6 +12,8 @@ export function reducer(state: IAppState = initialState, action: WallpaperAction
     case WallpaperActions.ADD_RECENT_WALLPAPERS:
       return { ...state, recent: [...action.payload] };
     case WallpaperActions.ADD_WALLPAPER_TO_FAVORITES:
+      // TODO Only Unique
+      // Get The State of current item;
       const newFavorites = [action.payload, ...state.favorites];
       return { ...state, favorites: newFavorites };
     case WallpaperActions.REMOVE_WALLPAPER_FROM_FAVORITES:

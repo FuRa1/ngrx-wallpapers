@@ -1,8 +1,7 @@
-
+<a routerLink="../favorites">Go to Favorites</a>
 <app-search></app-search>
 <app-grid
   [wallpapers]="recent"
   [actionName]="'Favorite'"
-  [action]="addToFavorites"
+  [action]="addToFavorites.bind(this)"
 ></app-grid>
-<a routerLink="favorites">Go to Favorites</a>

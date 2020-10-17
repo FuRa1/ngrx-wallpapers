@@ -1,4 +1,4 @@
-import {  Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UnsplashApiService } from '../unsplash-api.service';
 import { toJson } from 'unsplash-js';
 import { select, Store } from '@ngrx/store';
@@ -20,13 +20,8 @@ export class DashboardComponent implements OnInit {
     private unsplashAPi: UnsplashApiService,
     private store: Store<{ wallpapers: IAppState }>
   ) {
-    store
-      .pipe(
-        select('wallpapers')
-      )
-      .subscribe(
-        data => (this.recent = data.recent)
-      );
+    store.pipe(select('wallpapers'))
+      .subscribe(data => (this.recent = data.recent));
   }
 
   public addToFavorites(paper: IWallpaper): void {
@@ -34,11 +29,18 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.unsplashAPi.getLast15()
-      .then(toJson)
-      .then((json: IWallpaper[]) => {
-        this.store.dispatch(new WallpaperActions.AddRecentWallpapers(json));
-      });
+    const recent = JSON.parse(localStorage.getItem('recent'));
+    if (recent) {
+      this.store.dispatch(new WallpaperActions.AddRecentWallpapers(recent));
+    } else {
+      this.unsplashAPi.getLast15()
+        .then(toJson)
+        .then((json: IWallpaper[]) => {
+          localStorage.setItem('recent', JSON.stringify(json));
+          this.store.dispatch(new WallpaperActions.AddRecentWallpapers(json));
+        });
+    }
+
   }
 
 
