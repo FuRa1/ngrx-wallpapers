@@ -16,10 +16,7 @@ export class FavoritesComponent implements OnInit {
   constructor(
     private store: Store<{ wallpapers: IAppState }>,
   ) {
-    store
-      .pipe(
-        select('wallpapers')
-      )
+    store.pipe(select('wallpapers'))
       .subscribe(
         data => (this.favorites = data.favorites)
       );
@@ -29,7 +26,7 @@ export class FavoritesComponent implements OnInit {
   }
 
   public removeFromFavorites(wallpaper: IWallpaper): void {
-    this.store.dispatch(new WallpaperActions.RemoveWallpaperFromFavorites(wallpaper));
+    this.store.dispatch(WallpaperActions.removeWallpaperFromFavorites({ paper: wallpaper }));
   }
 
 }

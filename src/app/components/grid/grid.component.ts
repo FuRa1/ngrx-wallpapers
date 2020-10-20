@@ -26,6 +26,11 @@ export class GridComponent implements OnInit {
   public dispatchAction(paper: IWallpaper): void {
     this.action(paper);
   }
+
+  public dispatchDownload(downloadLink: string): void {
+    // TODO download;
+
+  }
 }
 
 

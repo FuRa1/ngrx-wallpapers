@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 import { IWallpaper } from '../models/wallpaper.model';
 
 export const RECENT_LOADING = '[WALLPAPERS] Recent Loading';
@@ -7,38 +7,28 @@ export const ADD_RECENT_WALLPAPERS = '[WALLPAPERS] Add Recent';
 export const ADD_WALLPAPER_TO_FAVORITES = '[WALLPAPERS] Add';
 export const REMOVE_WALLPAPER_FROM_FAVORITES = '[WALLPAPERS] Remove';
 
-export class AddRecentWallpapers implements Action {
-  readonly type = ADD_RECENT_WALLPAPERS;
 
-  constructor(public payload: IWallpaper[]) {
-  }
-}
+export const loadRecentSuccess = createAction(
+  ADD_RECENT_WALLPAPERS,
+  props<{ recent: IWallpaper[] }>()
+);
 
-export class AddWallpaperToFavorites implements Action {
-  readonly type = ADD_WALLPAPER_TO_FAVORITES;
+export const addWallpaperToFavorites = createAction(
+  ADD_WALLPAPER_TO_FAVORITES,
+  props<{ paper: IWallpaper }>()
+);
 
-  constructor(public payload: IWallpaper) {
-  }
-}
 
-export class RemoveWallpaperFromFavorites implements Action {
-  readonly type = REMOVE_WALLPAPER_FROM_FAVORITES;
+export const removeWallpaperFromFavorites = createAction(
+  REMOVE_WALLPAPER_FROM_FAVORITES,
+  props<{ paper: IWallpaper }>()
+);
 
-  constructor(public payload: IWallpaper) {
-  }
-}
+export const recentLoading = createAction(
+  RECENT_LOADING,
+);
 
-export class RecentLoading implements Action {
-  readonly type = RECENT_LOADING;
-}
 
-export class RecentLoaded implements Action {
-  readonly type = RECENT_LOADED;
-}
-
-export type Actions =
-  AddWallpaperToFavorites |
-  RemoveWallpaperFromFavorites |
-  AddRecentWallpapers |
-  RecentLoading |
-  RecentLoaded;
+export const recentLoaded = createAction(
+  RECENT_LOADED,
+);

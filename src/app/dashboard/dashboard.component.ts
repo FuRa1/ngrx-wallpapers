@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { IWallpaper, IUser } from '../models/wallpaper.model';
-import * as WallpaperActions from './../actions/wallpapers.actions';
 import { IAppState } from '../app.state';
 import { GET_RECENT_WALLPAPERS } from '../actions/wallpapers.effects';
+import { addWallpaperToFavorites } from '../actions/wallpapers.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,12 +27,11 @@ export class DashboardComponent implements OnInit {
   }
 
   public addToFavorites(paper: IWallpaper): void {
-    this.store.dispatch(new WallpaperActions.AddWallpaperToFavorites(paper));
+    this.store.dispatch(addWallpaperToFavorites({ paper }));
   }
 
   ngOnInit(): void {
     this.store.dispatch({type: GET_RECENT_WALLPAPERS});
-
   }
 
 

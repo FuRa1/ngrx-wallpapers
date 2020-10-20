@@ -1,32 +1,39 @@
 import { IWallpaper } from '../models/wallpaper.model';
 import * as WallpaperActions from '../actions/wallpapers.actions';
 import { IAppState } from '../app.state';
+import { createReducer, on } from '@ngrx/store';
 
 const initialState: IAppState = {
-  recent: [],
+  recent: [], // TODO Refactor store as an object key: id
   favorites: [],
   recentLoading: false,
+  recentLoaded: false,
 };
 
-export function reducer(state: IAppState = initialState, action: WallpaperActions.Actions): IAppState {
-  switch (action.type) {
-    case WallpaperActions.RECENT_LOADING:
-      return { ...state, recentLoading: true};
-    case WallpaperActions.RECENT_LOADED:
-      return { ...state, recentLoading: false};
-    case WallpaperActions.ADD_RECENT_WALLPAPERS:
-      return { ...state, recent: [...action.payload] };
-    case WallpaperActions.ADD_WALLPAPER_TO_FAVORITES:
-      // TODO Only Unique
-      // Get The State of current item;
-      const newFavorites = [action.payload, ...state.favorites];
-      return { ...state, favorites: newFavorites };
-    case WallpaperActions.REMOVE_WALLPAPER_FROM_FAVORITES:
-      const filteredFavorites = state.favorites.filter((wallpaper: IWallpaper) => {
-        return wallpaper.id !== action.payload.id;
-      });
-      return { ...state, favorites: filteredFavorites };
-    default:
-      return state;
-  }
-}
+export const reducer = createReducer(
+  initialState,
+  on(WallpaperActions.loadRecentSuccess, (state, { recent }) => ({
+      ...state,
+      recent,
+      recentLoaded: true,
+      recentLoading: false,
+    })
+  ),
+  on(WallpaperActions.recentLoading, (state) => ({
+      ...state,
+      recentLoading: true,
+    })
+  ),
+  on(WallpaperActions.addWallpaperToFavorites, (state, { paper }) => ({
+      ...state,
+      favorites: [paper, ...state.favorites] // TODO remove duplicates after store refactor;
+    })
+  ),
+  on(WallpaperActions.removeWallpaperFromFavorites, (state, { paper }) => ({
+      ...state,
+      favorites:  state.favorites.filter((wallpaper: IWallpaper) => {
+        return wallpaper.id !== paper.id;
+      })
+    })
+  )
+);

@@ -1,31 +1,40 @@
 .grid {
   &-wrp{
     display: grid;
-    grid-column-gap: 5px;
-    grid-row-gap: 5px;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
     grid-template-columns: repeat(3, 1fr);
-    justify-items: stretch;
-    align-items: center;
-    align-content: center;
+    background-color: white;
+    padding: 15px;
   }
   &-item{
     position: relative;
+    display: flex;
+    padding: 10px 0;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.12);
   }
-  &-action{
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    z-index: 1;
-    padding: 5px;
+  &-actions{
+    padding: 5px 10px 0;
     border-radius: 5px;
-    background-color: aqua;
-    cursor: pointer;
-    box-shadow: 2px 1px 4px grey;
-    &:hover{
-      background-color: darken(aqua, 5%);
-    }
-    &:active{
-      background-color: darken(aqua, 15%);
+    display: flex;
+    justify-content: flex-end;
+    span{
+      box-shadow: 2px 1px 4px grey;
+      cursor: pointer;
+      padding: 3px 5px;
+      border-radius: 5px;
+      background-color: lighten(aliceblue, 5%);
+      transition: box-shadow 150ms linear;
+      margin: 0 5px;
+      &:hover{
+        background-color: aliceblue;
+      }
+      &:active {
+        background-color: darken(aliceblue, 5%);
+      }
     }
   }
 }

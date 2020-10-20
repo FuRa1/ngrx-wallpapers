@@ -1,7 +1,9 @@
-<a routerLink="../dashboard">Go to Dashboard</a>
-<app-grid
-  [wallpapers]="favorites"
-  [actionName]="'Remove'"
-  [action]="removeFromFavorites.bind(this)"
-></app-grid>
-<!-- TODO ANIMATION ON NAVIGATION -->
+<section>
+  <a routerLink="../dashboard">Go to Dashboard</a>
+  <app-grid
+    [wallpapers]="favorites"
+    [actionName]="'Remove'"
+    [action]="removeFromFavorites.bind(this)"
+  ></app-grid>
+  <!-- TODO ANIMATION ON NAVIGATION -->
+</section>
