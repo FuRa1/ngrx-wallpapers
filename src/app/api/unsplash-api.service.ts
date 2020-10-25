@@ -18,7 +18,6 @@ export class UnsplashApiService {
   }
 
   public searchWallpapers(input: { [key: string]: string, searchString: string }): Observable<any> {
-    console.log(input);
     return from(this.unsplash.search.photos(input.searchString, 1, 15, { orientation: 'portrait' }).then(toJson));
   }
 }

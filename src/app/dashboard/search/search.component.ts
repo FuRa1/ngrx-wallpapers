@@ -29,7 +29,6 @@ export class SearchComponent implements OnInit {
     this.searchForm.valueChanges
       .pipe(debounceTime(300))
       .subscribe((values: { search: string }) => {
-        console.log(values);
         this.store.dispatch({ type: SEARCH_WALLPAPERS, searchString: values.search });
       });
   }
