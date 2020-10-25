@@ -14,6 +14,7 @@ import { SharedComponentsModule } from './components/components.module';
 import { EffectsModule } from '@ngrx/effects';
 import { WallpapersEffects } from './actions/wallpapers.effects';
 import { UnsplashApiService } from './api/unsplash-api.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

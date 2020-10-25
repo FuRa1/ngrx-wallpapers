@@ -4,7 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { SearchComponent } from './search/search.component';
 import { RouterModule } from '@angular/router';
 import { SharedComponentsModule } from '../components/components.module';
-import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +13,8 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [
     RouterModule,
     SharedComponentsModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }

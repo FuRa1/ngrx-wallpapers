@@ -6,32 +6,50 @@ import { UnsplashApiService } from '../api/unsplash-api.service';
 import * as WallpaperActions from './wallpapers.actions';
 
 export const GET_RECENT_WALLPAPERS = '[WALLPAPERS] Recent';
+export const SEARCH_WALLPAPERS = '[SEARCH_WALLPAPERS] Search';
 
 
 @Injectable()
 export class WallpapersEffects {
   loadRecent$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(GET_RECENT_WALLPAPERS),
-        concatMap(() => concat(
-          of(WallpaperActions.recentLoading()),
-          this.unsplashApi.getLast15()
-            .pipe(
-              delay(1500),
-              switchMap(recent => [
-                WallpaperActions.loadRecentSuccess({ recent }),
-              ]),
-              catchError(() => EMPTY)   // TODO Error Handling
-            )))
-      )
+    this.actions$.pipe(
+      ofType(GET_RECENT_WALLPAPERS),
+      concatMap(() => concat( // TODO WHY concatMap;
+        of(WallpaperActions.recentLoading()),
+        this.unsplashApi.getLast15()
+          .pipe(
+            delay(1500),
+            switchMap(recent => [
+              WallpaperActions.loadRecentSuccess({ recent }),
+            ]),
+            catchError(() => EMPTY)   // TODO Error Handling
+          )))
+    )
   );
 
+  searchPapers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SEARCH_WALLPAPERS),
+      concatMap((input) => concat(
+        of(WallpaperActions.recentLoading()),
+          this.unsplashApi.searchWallpapers(input)
+            .pipe(
+              switchMap(results => [
+                WallpaperActions.loadRecentSuccess({ recent: results.results }),
+              ]),
+              catchError(() => EMPTY)   // TODO Error Handling
+            )
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,
     private unsplashApi: UnsplashApiService
   ) {
   }
+
   //
   // @Effect()
   // loadRecent$ = this.actions$.pipe(

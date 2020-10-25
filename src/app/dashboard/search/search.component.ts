@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { SEARCH_WALLPAPERS } from '../../actions/wallpapers.effects';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  public searchForm: FormGroup;
 
-  ngOnInit(): void {
+  constructor(
+    private store: Store,
+  ) {
   }
 
+  ngOnInit(): void {
+    this.initSearchForm();
+  }
+
+  private initSearchForm(): void {
+    this.searchForm = new FormGroup({
+      search: new FormControl(null)
+    });
+    this.searchForm.valueChanges
+      .pipe(debounceTime(300))
+      .subscribe((values: { search: string }) => {
+        console.log(values);
+        this.store.dispatch({ type: SEARCH_WALLPAPERS, searchString: values.search });
+      });
+  }
 }

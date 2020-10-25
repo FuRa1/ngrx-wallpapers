@@ -16,4 +16,9 @@ export class UnsplashApiService {
   public getLast15(): Observable<any> {
     return from(this.unsplash.photos.listPhotos(2, 15, 'latest').then(toJson));
   }
+
+  public searchWallpapers(input: { [key: string]: string, searchString: string }): Observable<any> {
+    console.log(input);
+    return from(this.unsplash.search.photos(input.searchString, 1, 15, { orientation: 'portrait' }).then(toJson));
+  }
 }
