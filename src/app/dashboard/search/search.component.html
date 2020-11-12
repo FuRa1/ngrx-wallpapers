@@ -1,6 +1,5 @@
-<form [formGroup]="searchForm">
+<form class="search-form" [formGroup]="searchForm">
   <label for="searchInput">
-    Search:
+    <input formControlName="search" placeholder="Search: Green, Car, Buildings" id="searchInput"/>
   </label>
-  <input formControlName="search" id="searchInput"/>
 </form>

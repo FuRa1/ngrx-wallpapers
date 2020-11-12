@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IWallpaper } from '../../models/wallpaper.model';
+import { UnsplashApiService } from '../../api/unsplash-api.service';
 
 @Component({
   selector: 'app-grid',
@@ -16,7 +17,9 @@ export class GridComponent implements OnInit {
   @Input() action: (paper: IWallpaper) => void;
   @Input() actionName: string;
 
-  constructor() {
+  constructor(
+    private readonly unsplashApi: UnsplashApiService,
+  ) {
 
   }
 
@@ -27,9 +30,8 @@ export class GridComponent implements OnInit {
     this.action(paper);
   }
 
-  public dispatchDownload(downloadLink: string): void {
-    // TODO download;
-
+  public download(paper: IWallpaper, size: 'regular' | 'full'): void {
+    this.unsplashApi.download(paper.urls[size], `${paper.id}_${size}`);
   }
 }
 

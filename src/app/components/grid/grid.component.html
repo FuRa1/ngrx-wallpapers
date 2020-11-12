@@ -1,15 +1,18 @@
-<div class="grid-wrp">
+<div class="grid-container">
   <ng-container *ngFor="let wallpaper of wallpapers">
     <article class="grid-item">
-      <h5>{{ wallpaper.description }}</h5>
-      <img [src]="wallpaper.urls.small"  alt="none"/>
-      <div class="grid-actions">
-        <span *ngIf="wallpaper.urls.full" (click)="dispatchDownload(wallpaper.urls.full)">&#8595; Full</span>
-        <span *ngIf="wallpaper.urls.raw" (click)="dispatchDownload(wallpaper.urls.raw)"> &#8595; Raw</span>
-        <span *ngIf="wallpaper.urls.regular" (click)="dispatchDownload(wallpaper.urls.regular)"> &#8595; Regular</span>
-        <span [ngClass]="actionName" (click)="dispatchAction(wallpaper)">{{ actionName }}</span>
+      <div class="grid-content-wrapper">
+        <div class="grid-actions">
+          <!--            <span *ngIf="wallpaper.urls.raw" (click)="dispatchDownload(wallpaper.urls.raw)"> &#8595; Raw</span>-->
+          <span *ngIf="wallpaper.urls.regular" (click)="download(wallpaper, 'regular')"> &#8595; Regular</span>
+          <span *ngIf="wallpaper.urls.regular" (click)="download(wallpaper, 'full')"> &#8595; Full</span>
+
+          <span [ngClass]="actionName" (click)="dispatchAction(wallpaper)">{{ actionName }}</span>
+        </div>
       </div>
+      <div class="grid-image" [style.backgroundImage]="'url('+ wallpaper.urls.regular +')'"></div>
     </article>
+    <!--    </div>-->
   </ng-container>
 </div>
 <div *ngIf="papers">Loading...</div>

@@ -15,6 +15,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { WallpapersEffects } from './actions/wallpapers.effects';
 import { UnsplashApiService } from './api/unsplash-api.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FavoritesModule,
     CommonModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     EffectsModule.forRoot([WallpapersEffects]),
     StoreModule.forRoot({
@@ -35,7 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
   ],
   providers: [
-    UnsplashApiService
+    UnsplashApiService,
+    HttpClient,
   ],
   bootstrap: [AppComponent]
 })

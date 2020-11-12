@@ -1,27 +1,66 @@
+@import "~src/app/styles/variables";
+
+// trigger animation
 .grid {
-  &-wrp{
+  &-container {
     display: grid;
     grid-column-gap: 15px;
     grid-row-gap: 15px;
     grid-template-columns: repeat(3, 1fr);
-    background-color: white;
+    background-color: $grid-bg;
     padding: 15px;
+    flex-wrap: wrap;
   }
-  &-item{
-    position: relative;
+
+  &-content-wrapper {
     display: flex;
-    padding: 10px 0;
-    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+    height: 100%;
     flex-direction: column;
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    justify-content: center;
   }
-  &-actions{
-    padding: 5px 10px 0;
+
+  &-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+  }
+
+  &-item {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    transition-delay: .30s;
+    transition: all 0.3s linear;
+
+    &:hover {
+      .grid-content-wrapper {
+        .grid-actions {
+          opacity: 1 !important;
+        }
+      }
+
+    }
+  }
+
+  &-actions {
     border-radius: 5px;
     display: flex;
-    justify-content: flex-end;
-    span{
+    justify-content: center;
+    margin-bottom: 14px;
+    padding: 0 10px;
+    transition: opacity 0.2s ease-out;
+    opacity: 0;
+
+    span {
       box-shadow: 2px 1px 4px grey;
       cursor: pointer;
       padding: 3px 5px;
@@ -29,9 +68,12 @@
       background-color: lighten(aliceblue, 5%);
       transition: box-shadow 150ms linear;
       margin: 0 5px;
-      &:hover{
+      text-decoration: none;
+      color: inherit;
+      &:hover, &:focus {
         background-color: aliceblue;
       }
+
       &:active {
         background-color: darken(aliceblue, 5%);
       }
