@@ -14,13 +14,12 @@ export class WallpapersEffects {
   loadRecent$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GET_RECENT_WALLPAPERS),
-      concatMap(() => concat( // TODO WHY concatMap;
-        of(WallpaperActions.recentLoading()),
-        this.unsplashApi.getLast15()
+      concatMap(() => concat(
+        of(WallpaperActions.recentLoading()), // Dispatch Action Run loader
+        this.unsplashApi.getLast15() // Common httpClient api service
           .pipe(
-            delay(1500),
             switchMap(recent => [
-              WallpaperActions.loadRecentSuccess({ recent }),
+              WallpaperActions.loadRecentSuccess({ recent }), // Dispatch Action when loaded
             ]),
             catchError(() => EMPTY)   // TODO Error Handling
           )))

@@ -26,7 +26,9 @@ export const reducer = createReducer(
   ),
   on(WallpaperActions.addWallpaperToFavorites, (state, { paper }) => ({
       ...state,
-      favorites: [paper, ...state.favorites] // TODO remove duplicates after store refactor;
+      favorites: [paper,
+        ...state.favorites.filter((fav: IWallpaper) => fav.id !== paper.id)
+      ]
     })
   ),
   on(WallpaperActions.removeWallpaperFromFavorites, (state, { paper }) => ({

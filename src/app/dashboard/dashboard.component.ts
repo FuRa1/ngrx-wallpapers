@@ -31,7 +31,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch({type: GET_RECENT_WALLPAPERS});
+    if (!this.recent || this.recent && !this.recent.length) {
+      this.store.dispatch({ type: GET_RECENT_WALLPAPERS });
+    }
   }
 
 
