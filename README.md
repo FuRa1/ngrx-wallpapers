@@ -63,6 +63,7 @@ export class WallpapersEffects {
 }
 ```
 
+##### Dispatch from component
 ```ts 
  this.store.dispatch({type: GET_RECENT_WALLPAPERS});
 ```
