@@ -2,9 +2,9 @@
 
 ngrx-store app reference
 
-###- Standard action -
+### - Standard action -
 
-#####Create Action
+##### Create Action
 
 ```ts
 export const addWallpaperToFavorites = createAction(
@@ -13,7 +13,7 @@ export const addWallpaperToFavorites = createAction(
 );
 ```
 
-#####Create Reducer
+##### Create Reducer
 
 ```ts
 export const reducer = createReducer(
