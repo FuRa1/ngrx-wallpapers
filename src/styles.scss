@@ -1,4 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~src/app/styles/variables";
 /* You can add global styles to this file, and also import other style files */
 html, body {
   margin: 0;
@@ -10,4 +11,18 @@ html, body {
 }
 app-dashboard, app-favorites{
   flex: 1;
+}
+.nav-link{
+  display: block;
+  width: 100%;
+  color: wheat;
+  text-align: center;
+  text-decoration:none;
+  &:focus, &:hover{
+    text-decoration:none;
+  }
+}
+
+input {
+  outline: none !important;
 }
